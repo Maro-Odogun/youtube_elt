@@ -1,0 +1,1 @@
+chmod +x ./docker/postgres/init-multiple-databases.sh
