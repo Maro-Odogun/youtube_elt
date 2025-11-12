@@ -87,10 +87,11 @@ jobs:
       - name: Run End-to-End DAG tests
         if: steps.changed-files-tests.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch'
         run: |
-          # Test each DAG but mark trigger tasks as success to avoid the DagNotFound error
-          docker exec -t airflow-worker sh -c "airflow dags test produce_json --mark-success-pattern 'trigger_update_db'"
-          docker exec -t airflow-worker sh -c "airflow dags test update_db --mark-success-pattern 'trigger_data_quality'"
-          docker exec -t airflow-worker sh -c "airflow dags test data_quality"
+          docker exec -t airflow-worker sh -c "airflow dags unpause produce_json"
+          docker exec -t airflow-worker sh -c "airflow dags unpause update_db"
+          docker exec -t airflow-worker sh -c "airflow dags unpause data_quality"
+
+          docker exec -t airflow-worker sh -c "airflow dags trigger produce_json -w"
       - name: Tear Down Docker Compose
         if: always() && (steps.changed-files-tests.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch')
         run: docker compose down
