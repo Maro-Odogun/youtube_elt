@@ -41,8 +41,8 @@ with DAG(
     saved_json = save_file(extracted_data)
 
     trigger_update_db = TriggerDagRunOperator(
-        task_id='trigger_update_db',
-        trigger_dag_id='update_db',
+        task_id="trigger_update_db",
+        trigger_dag_id="update_db",
     )
 
     plalist_id >> video_ids >> extracted_data >> saved_json >> trigger_update_db
@@ -59,8 +59,8 @@ with DAG(
     update_core = core_table()
 
     trigger_data_quality = TriggerDagRunOperator(
-        task_id='trigger_data_quality',
-        trigger_dag_id='data_quality',
+        task_id="trigger_data_quality",
+        trigger_dag_id="data_quality",
     )
 
     update_staging >> update_core >> trigger_data_quality
