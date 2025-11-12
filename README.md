@@ -1,2 +1,2 @@
-# youtube_elt
-# youtube_elt
+This is a data pipeline which extracts key details from all videos on a channel, applies minor transformations and logs all data into a postgres database. It was completed as part of the requirements for the 'Data Engineering Project SQL, Python, Airflow, Docker, CI/CD' course by Matthew Schembri on Udemy: https://www.udemy.com/course/start-your-data-engineering-journey-project-based-learning/?couponCode=KEEPLEARNING
+
