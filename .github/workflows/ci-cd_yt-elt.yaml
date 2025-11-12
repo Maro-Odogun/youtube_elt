@@ -87,11 +87,10 @@ jobs:
       - name: Run End-to-End DAG tests
         if: steps.changed-files-tests.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch'
         run: |
-          docker exec -t airflow-worker sh -c "airflow dags unpause produce_json"
-          docker exec -t airflow-worker sh -c "airflow dags unpause update_db"
-          docker exec -t airflow-worker sh -c "airflow dags unpause data_quality"
-
-          docker exec -t airflow-worker sh -c "airflow dags trigger produce_json -w"
+          DAG_NAMES=("produce_json" "update_db" "data_quality")
+          for DAG in "${DAG_NAMES[@]}"; do
+            docker exec -t airflow-worker sh -c "airflow ags test $DAG"
+          done
       - name: Tear Down Docker Compose
         if: always() && (steps.changed-files-tests.outputs.any_changed == 'true' || github.event_name == 'workflow_dispatch')
         run: docker compose down
