@@ -43,8 +43,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-push-image
     env:
-      AIRFLOW_WW_USER_PASSWORD: ${{ secrets.AIRFLOW_WW_USER_PASSWORD }}
-      AIRFLOW_WW_USER_USERNAME: ${{ secrets.AIRFLOW_WW_USER_USERNAME }}
+      AIRFLOW_WWW_USER_PASSWORD: ${{ secrets.AIRFLOW_WWW_USER_PASSWORD }}
+      AIRFLOW_WWW_USER_USERNAME: ${{ secrets.AIRFLOW_WWW_USER_USERNAME }}
       API_KEY: ${{ secrets.API_KEY }}
       CELERY_BACKEND_NAME: ${{ secrets.CELERY_BACKEND_NAME }}
       CELERY_BACKEND_PASSWORD: ${{ secrets.CELERY_BACKEND_PASSWORD }}
